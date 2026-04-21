@@ -76,4 +76,9 @@ public class TutorEmpresa extends Usuario {
 	public void setFormaciones(List<FormacionEmpresa> formaciones) {
 		this.formaciones = formaciones;
 	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+	
 }

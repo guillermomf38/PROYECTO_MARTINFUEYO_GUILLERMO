@@ -67,4 +67,8 @@ public class Estudiante extends Usuario {
 		this.curso = curso;
 	}
 
+	public void setProfesorado(Profesorado profesorado) {
+		this.profesorado = profesorado;
+	}
+
 }

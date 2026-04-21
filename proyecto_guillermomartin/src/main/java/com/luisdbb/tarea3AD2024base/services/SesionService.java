@@ -54,7 +54,4 @@ public class SesionService {
 	        return null;
 	    }
 	 
-	    public boolean estaLogueado() {
-	        return usuarioLogueado != null;
-	    }
 }
