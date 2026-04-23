@@ -1,9 +1,15 @@
 
 /**
  *Clase Estudiante.java
- * 
+ *
+ *Entidad que representa a un estudiante
+ *
+ *Cada estudiante está asociado a un {@link Profesorado}
+ *y puede tener varias {@link FormacionEmpresa}
  *@author Guillermo Martin Fueyo
  *@version 1.0
+ *@see Profesorado
+ *@see FormacionEmpresa
  */
 
 package com.luisdbb.tarea3AD2024base.modelo;
@@ -24,11 +30,20 @@ public class Estudiante extends Usuario {
 	private String nombre;
 	private String apellidos;
 	private String curso;
-    
+	
+	/**
+     * Tutor de centro responsable de este estudiante.
+     * Relación {@code @ManyToOne} la FK {@code idProfesorado} reside en esta tabla.
+     */
 	@ManyToOne
 	@JoinColumn(name="idProfesorado")
 	private Profesorado profesorado;
 	
+	 /**
+     * Historial de formaciones en empresa del estudiante.
+     * La eliminación en cascada garantiza que al borrar el estudiante
+     * se eliminan también sus registros de formación.
+     */
 	@OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL)
     private List<FormacionEmpresa> formaciones;
 	

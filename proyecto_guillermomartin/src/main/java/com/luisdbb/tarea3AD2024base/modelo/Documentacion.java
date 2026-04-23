@@ -1,9 +1,11 @@
-
 /**
  *Clase Documentacion.java
  * 
+ *Entidad que representa un documento asociado a una formación en empresa.
+ *
  *@author Guillermo Martin Fueyo
  *@version 1.0
+ *@see FormacionEmpresa
  */
 
 package com.luisdbb.tarea3AD2024base.modelo;
@@ -18,14 +20,24 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="Documentacion")
 public class Documentacion {
+	
+	/**
+     * Identificador único generado automáticamente.
+     */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idDocumento",unique=true, updatable = false, nullable = false)
 	
 	private Long idDocumento;
 	private String nombre;
+	
+	/** Tipo del documento */
 	private String tipo;
 	
+	/**
+     * Clave foránea que referencia a la {@link FormacionEmpresa}
+     * a la que pertenece este documento.
+     */
 	@Column(name = "idFormacion")
 	private Long idFormacion;
 	

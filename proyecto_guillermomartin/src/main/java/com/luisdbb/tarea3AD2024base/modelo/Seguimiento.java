@@ -1,9 +1,18 @@
 
 /**
  *Clase Seguimiento.java
+ *
+ * Entidad que registra una entrada de seguimiento sobre una formación en empresa.
+ * 
+ *El {@link TutorEmpresa} genera registros de seguimiento para documentar
+ *el progreso del estudiante: observaciones sobre su desempeño, valoración
+ *obtenida y fecha del seguimiento. Una {@link FormacionEmpresa} puede tener
+ *múltiples registros de seguimiento a lo largo del periodo.
  * 
  *@author Guillermo Martin Fueyo
  *@version 1.0
+ *@see FormacionEmpresa
+ * @see TutorEmpresa
  */
 
 package com.luisdbb.tarea3AD2024base.modelo;
@@ -22,7 +31,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Seguimiento")
 public class Seguimiento {
-
+	/**
+     * Identificador único generado automáticamente.
+     */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idSeguimiento", unique = true, updatable = false, nullable = false)
@@ -31,7 +42,11 @@ public class Seguimiento {
 	private String observaciones;
 	private String valoracion;
 	private LocalDate fecha;
-
+	
+	/**
+     * Formación en empresa a la que pertenece este seguimiento.
+     * FK {@code idFormacion} en la tabla {@code Seguimiento}.
+     */
 	@ManyToOne
 	@JoinColumn(name = "idFormacion")
 	private FormacionEmpresa formacion;

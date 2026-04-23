@@ -1,9 +1,13 @@
 
 /**
  *Clase Profesorado.java
- * 
+ *Entidad que representa al tutor de centro
+ *Extiende {@link Usuario} con perfil {@link Perfil#PROFESORADO}.
  *@author Guillermo Martin Fueyo
  *@version 1.0
+ *@see Usuario
+ *@see Estudiante
+ *@see PeriodoPracticas
  */
 
 package com.luisdbb.tarea3AD2024base.modelo;
@@ -21,10 +25,13 @@ public class Profesorado extends Usuario {
 
 	private String nombre;
 	private String apellidos;
-
+	/** Correo electrónico. Debe ser único en el sistema. */
 	@Column(unique = true)
 	private String email;
-	
+	/**
+     * Lista de estudiantes asignados a este tutor de centro.
+     * Relación {@code @OneToMany} la FK reside en {@link Estudiante}.
+     */
 	@OneToMany(mappedBy="profesorado")
 	private List<Estudiante>estudiantes;
 

@@ -1,7 +1,8 @@
-
 /**
  *Clase Perfil.java
- * 
+ *
+ *Enumeración que define los perfiles de usuario del sistema. 
+ *
  *@author Guillermo Martin Fueyo
  *@version 1.0
  */

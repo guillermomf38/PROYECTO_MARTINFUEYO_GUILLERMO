@@ -1,9 +1,16 @@
 
 /**
  *Clase TutorEmpresa.java
- * 
+ *
+ *Entidad que representa al tutor de empresa.
+ *Extiende {@link Usuario} con perfil {@link Perfil#TUTOREMPRESA}.
+ *Pertenece a una {@link Empresa} y puede supervisar varias
+ *{@link FormacionEmpresa} simultáneamente.
  *@author Guillermo Martin Fueyo
  *@version 1.0
+ *@see Usuario
+ *@see Empresa
+ *@see FormacionEmpresa
  */
 
 package com.luisdbb.tarea3AD2024base.modelo;
@@ -25,12 +32,22 @@ public class TutorEmpresa extends Usuario {
 	private String nombre;
 	private String apellidos;
 
+    /** Correo electrónico de contacto. Debe ser único. */
 	@Column(unique = true)
 	private String email;
-
+	
+	/**
+     * Empresa a la que pertenece este tutor.
+     * FK {@code idEmpresa} en la tabla {@code TutorEmpresa}.
+     */
 	@ManyToOne
 	@JoinColumn(name = "idEmpresa")
 	private Empresa empresa;
+	
+	 /**
+     * Lista de formaciones en empresa que supervisa este tutor.
+     * Relación {@code @OneToMany} la FK reside en {@link FormacionEmpresa}.
+     */
 
 	@OneToMany(mappedBy = "tutorEmpresa") 
 	private List<FormacionEmpresa> formaciones = new ArrayList<>();

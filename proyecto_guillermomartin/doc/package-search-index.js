@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.luisdbb.tarea3AD2024base.modelo"}];updateSearchResults();

@@ -2,8 +2,17 @@
 /**
  *Clase PeriodoPracticas.java
  * 
+ *Entidad que representa un periodo de formación en empresa dentro de un
+ *curso académico.
+ *
+ *Un {@link Profesorado} actúa
+ *como coordinador del periodo. Cada {@link FormacionEmpresa} queda registrada
+ *dentro de un periodo concreto.
+ *
  *@author Guillermo Martin Fueyo
  *@version 1.0
+ *@see FormacionEmpresa
+ *@see Profesorado
  */
 
 package com.luisdbb.tarea3AD2024base.modelo;
@@ -25,6 +34,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="PeriodoPracticas")
 public class PeriodoPracticas {
+	/**
+     * Identificador único generado automáticamente.
+     */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idPeriodo",unique=true, updatable = false, nullable = false)
@@ -35,9 +47,18 @@ public class PeriodoPracticas {
 	private LocalDate fechaFin;
 	private String cursoAcademico;
 	
+	 /**
+     * Tutor de centro que actúa como coordinador de este periodo.
+     * FK {@code idProfesorado} en la tabla {@code PeriodoPracticas}.
+     */
 	@ManyToOne
 	@JoinColumn(name = "idProfesorado")
 	private Profesorado coordinador;
+	
+	/**
+     * Lista de formaciones en empresa registradas en este periodo.
+     * Relación {@code @OneToMany} gestionada desde {@link FormacionEmpresa}.
+     */
 	@OneToMany(mappedBy="periodoPracticas")
 	private List<FormacionEmpresa> formaciones =new ArrayList<>();;
 
