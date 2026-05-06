@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
 import com.luisdbb.tarea3AD2024base.config.StageManager;
+import com.luisdbb.tarea3AD2024base.view.FxmlView;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -70,7 +71,7 @@ public class AdministradorMenuController implements Initializable{
 	 
 	@FXML
 	private void irAsignarPerfil(ActionEvent event) {
-		
+		stageManager.switchScene(FxmlView.ASIGNARPERFIL);
 	}
 	@FXML
 	private void irGestionarTutores(ActionEvent event) {

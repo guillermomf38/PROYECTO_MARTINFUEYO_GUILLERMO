@@ -46,8 +46,18 @@ public enum FxmlView {
 		public String getFxmlFile() {
 			return "/fxml/TutorEmpresa.fxml";
 		}
+	},	
+	ASIGNARPERFIL{
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("asignarperfil.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/AsignarPerfil.fxml";
+		}
 	},
-	
 	LOGIN {
 		@Override
 		public String getTitle() {
