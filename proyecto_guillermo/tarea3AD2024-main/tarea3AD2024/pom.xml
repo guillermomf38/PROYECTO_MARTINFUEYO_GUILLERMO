@@ -55,6 +55,18 @@
 			<artifactId>javafx-web</artifactId>
 			<version>23</version>
 		</dependency>
+		
+		<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>test</scope>
+</dependency>
+
+<dependency>
+    <groupId>.comGuillermoComponente</groupId>
+    <artifactId>componente</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+</dependency>
 	</dependencies>
 
 	<build>
@@ -72,6 +84,33 @@
 						com.luisdbb.tarea3AD2024base.Tarea3Ad2024baseApplication</mainClass>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-assembly-plugin</artifactId>
+    <version>3.3.0</version>
+    <configuration>
+        <archive>
+            <manifest>
+                <mainClass>com.luisdbb.tarea3AD2024base.Tarea3AD2024Application</mainClass>
+            </manifest>
+        </archive>
+        <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+        </descriptorRefs>
+    </configuration>
+    <executions>
+        <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+                <goal>single</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+			
+			
 		</plugins>
 	</build>
 

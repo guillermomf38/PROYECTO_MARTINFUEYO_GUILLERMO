@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="480.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luisdbb.tarea3AD2024base.controller.ConsultarDatosController">
+    <top>
+      <VBox>
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="Créditos">
+                  <items>
+                    <MenuItem fx:id="openAutoria" mnemonicParsing="false" onAction="#handleAutoria" text="Acerca de" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Ayuda">
+                  <items>
+                    <MenuItem fx:id="openAyuda" mnemonicParsing="false" onAction="#handleAyuda" text="Sistema de Ayuda" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+              <HBox alignment="CENTER_LEFT" prefHeight="60" style="-fx-background-color:#5E4AE3; -fx-padding:0 20 0 20;">
+                  <Label style="-fx-font-size:16; -fx-font-weight:bold;" text="Consultar Datos de Estudiantes" textFill="WHITE" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="btnVolver" onAction="#volver" style="-fx-background-color:white; -fx-text-fill:#5E4AE3;                            -fx-font-weight:bold; -fx-padding:6 14;" text=" Volver" />
+              </HBox>
+         </children>
+      </VBox>
+    </top>
+    <center>
+        <VBox spacing="16" style="-fx-padding:24 30 16 30;">
+
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label minWidth="100" style="-fx-font-weight:bold;" text="Estudiante:" />
+                <ComboBox fx:id="cboEstudiante" onAction="#onEstudianteSeleccionado" prefWidth="260" promptText="Selecciona estudiante…" />
+            </HBox>
+
+            <Separator />
+
+            <GridPane hgap="14" vgap="10">
+                <Label minWidth="110" style="-fx-font-weight:bold;" text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label fx:id="lblNombre" prefHeight="18.0" prefWidth="157.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label minWidth="110" style="-fx-font-weight:bold;" text="Apellidos:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label fx:id="lblApellidos" prefHeight="18.0" prefWidth="155.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label minWidth="110" style="-fx-font-weight:bold;" text="Curso:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label fx:id="lblCurso" prefHeight="18.0" prefWidth="161.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label minWidth="110" style="-fx-font-weight:bold;" text="Usuario:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Label fx:id="lblUsuario" prefHeight="18.0" prefWidth="159.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                <Label minWidth="110" style="-fx-font-weight:bold;" text="Empresa:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <Label fx:id="lblEmpresa" prefHeight="18.0" prefWidth="158.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                <Label minWidth="110" style="-fx-font-weight:bold;" text="Periodo:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <Label fx:id="lblPeriodo" prefHeight="18.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <columnConstraints>
+               <ColumnConstraints />
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+            </GridPane>
+        </VBox>
+    </center>
+</BorderPane>

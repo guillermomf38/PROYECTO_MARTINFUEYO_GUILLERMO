@@ -1,8 +1,14 @@
 /**
  *Clase Estudiante.java
+ *
+ *Entidad que representa al alumno que realiza la formación en empresa.
+ *Extiende Usuario con perfil ESTUDIANTE.
+ *Pertenece a un Profesorado y puede tener varias FormacionEmpresa.
  * 
  *@author Guillermo Martin Fueyo
  *@version 1.0
+ *@see Profesorado
+ *@see FormacionEmpresa
  */
 
 package com.luisdbb.tarea3AD2024base.modelo;
@@ -23,11 +29,11 @@ public class Estudiante extends Usuario {
 	private String nombre;
 	private String apellidos;
 	private String curso;
-    
+	/** Tutor de centro asignado. FK idProfesorado. */
 	@ManyToOne
 	@JoinColumn(name="idProfesorado")
 	private Profesorado profesorado;
-	
+	/** Historial de formaciones. Cascade ALL. */
 	@OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL)
     private List<FormacionEmpresa> formaciones;
 	
@@ -66,5 +72,14 @@ public class Estudiante extends Usuario {
 	public void setCurso(String curso) {
 		this.curso = curso;
 	}
+
+	public Profesorado getProfesorado() {
+		return profesorado;
+	}
+
+	public void setProfesorado(Profesorado profesorado) {
+		this.profesorado = profesorado;
+	}
+	
 
 }

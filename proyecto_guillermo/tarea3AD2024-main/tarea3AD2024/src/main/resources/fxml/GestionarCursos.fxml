@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="570.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luisdbb.tarea3AD2024base.controller.GestionarCursosController">
+
+
+    <top>
+      <VBox>
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="Créditos">
+                  <items>
+                    <MenuItem fx:id="openAutoria" mnemonicParsing="false" onAction="#handleAutoria" text="Acerca de" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Ayuda">
+                  <items>
+                    <MenuItem fx:id="openAyuda" mnemonicParsing="false" onAction="#handleAyuda" text="Sistema de Ayuda" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+              <HBox alignment="CENTER_LEFT" prefHeight="60" style="-fx-background-color: #5E4AE3; -fx-padding: 0 20 0 20;">
+                  <Label style="-fx-font-size:16; -fx-font-weight:bold;" text="Gestionar Periodos de Prácticas" textFill="WHITE" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="btnVolver" onAction="#volver" style="-fx-background-color:white; -fx-text-fill:#5E4AE3;                            -fx-font-weight:bold; -fx-padding: 6 14;" text=" Volver" />
+              </HBox>
+         </children>
+      </VBox>
+    </top>
+
+   
+    <center>
+        <VBox spacing="12" style="-fx-padding: 18 20 10 20;">
+
+           
+            <GridPane hgap="10" vgap="8">
+              
+                <Label minWidth="120" text="Nombre periodo:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="txtNombrePeriodo" prefWidth="220" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label minWidth="120" text="Curso académico:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <TextField fx:id="txtCursoAcademico" prefWidth="150" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+
+               
+                <Label minWidth="120" text="Fecha inicio:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <DatePicker fx:id="dpFechaInicio" prefWidth="220" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label minWidth="120" text="Fecha fin:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <DatePicker fx:id="dpFechaFin" prefWidth="150" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <columnConstraints>
+               <ColumnConstraints />
+               <ColumnConstraints />
+               <ColumnConstraints />
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+            </GridPane>
+
+            
+            <HBox spacing="10">
+                <Button fx:id="btnGuardar" onAction="#guardar" prefWidth="100" style="-fx-background-color:#5E4AE3; -fx-text-fill:white; -fx-font-weight:bold;" text="Guardar" />
+                <Button fx:id="btnModificar" onAction="#modificar" prefWidth="100" style="-fx-background-color:#5E4AE3; -fx-text-fill:white;" text="Modificar" />
+                <Button fx:id="btnEliminar" onAction="#eliminar" prefWidth="100" style="-fx-background-color:#c0392b; -fx-text-fill:white;" text="Eliminar" />
+                <Button fx:id="btnLimpiar" onAction="#limpiar" prefWidth="100" style="-fx-background-color:#7f8c8d; -fx-text-fill:white;" text="Limpiar" />
+            </HBox>
+
+            
+            <Label fx:id="lblMensaje" style="-fx-font-size:12; -fx-font-weight:bold;" />
+
+          
+            <TableView fx:id="tabla" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colNombre" prefWidth="220" text="Nombre del periodo" />
+                    <TableColumn fx:id="colInicio" prefWidth="120" text="Fecha inicio" />
+                    <TableColumn fx:id="colFin" prefWidth="120" text="Fecha fin" />
+                    <TableColumn fx:id="colCurso" prefWidth="130" text="Curso académico" />
+                </columns>
+                <placeholder>
+                    <Label text="No hay periodos de prácticas registrados." />
+                </placeholder>
+            </TableView>
+
+        </VBox>
+    </center>
+</BorderPane>

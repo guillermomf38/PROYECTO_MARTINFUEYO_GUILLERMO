@@ -27,12 +27,19 @@ import com.luisdbb.tarea3AD2024base.view.FxmlView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.web.WebView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 @Controller
 public class AsignarPerfilController implements Initializable {
@@ -61,6 +68,12 @@ public class AsignarPerfilController implements Initializable {
 	private Button btnLimpiar;
 	@FXML
 	private Button btnVolver;
+	
+	@FXML
+	private MenuItem openAutoria;
+	
+	@FXML
+	private MenuItem openAyuda;
 
 	@Lazy
 	@Autowired
@@ -73,6 +86,9 @@ public class AsignarPerfilController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		openAyuda.setAccelerator(
+		        new KeyCodeCombination(KeyCode.F1)
+		    );
 
 		rdProfesorado.setToggleGroup(grupoPerfil);
 		rdTutorEmpresa.setToggleGroup(grupoPerfil);
@@ -174,6 +190,64 @@ public class AsignarPerfilController implements Initializable {
 			return Perfil.ESTUDIANTE;
 		return null;
 	}
+	
+	 @FXML
+		private void handleAutoria(ActionEvent event) {
+			try {
+				WebView webView=new WebView();
+				
+				String url=getClass().getResource("/autoria/autoria.html").toExternalForm();
+				webView.getEngine().load(url);
+				
+				Stage helpStage=new Stage();
+				helpStage.setTitle("Créditos");
+				
+				Scene helpScene=new Scene(webView, 600,400);
+				
+				helpStage.setScene(helpScene);
+				
+				helpStage.initModality(Modality.APPLICATION_MODAL);
+				helpStage.setResizable(true);
+				
+				helpStage.show();
+				
+			}catch(NullPointerException e) {
+				Alert alert=new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Error");
+				alert.setHeaderText("Archivo no encontrado");
+				alert.setContentText("Por favor, verifica que el archivo 'autoria.html' este en la ruta '/autoria/autoria.html'");
+				alert.showAndWait();
+			}
+		}
+	  
+	  @FXML
+		private void handleAyuda(ActionEvent event) {
+			try {
+				WebView webView=new WebView();
+				
+				String url=getClass().getResource("/ayuda/ayuda.html").toExternalForm();
+				webView.getEngine().load(url);
+				
+				Stage helpStage=new Stage();
+				helpStage.setTitle("Ayuda");
+				
+				Scene helpScene=new Scene(webView, 600,400);
+				
+				helpStage.setScene(helpScene);
+				
+				helpStage.initModality(Modality.APPLICATION_MODAL);
+				helpStage.setResizable(true);
+				
+				helpStage.show();
+				
+			}catch(NullPointerException e) {
+				Alert alert=new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Error");
+				alert.setHeaderText("Archivo no encontrado");
+				alert.setContentText("Por favor, verifica que el archivo 'ayuda.html' este en la ruta '/ayuda/ayuda.html'");
+				alert.showAndWait();
+			}
+		}
 
 	private void mostrarError(String mensaje) {
 		Alert alert = new Alert(Alert.AlertType.ERROR);

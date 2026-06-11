@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luisdbb.tarea3AD2024base.controller.AdjuntarJustificanteController">
+	<top>
+	 
+		 <VBox>
+         <MenuBar>
+           <menus>
+             <Menu mnemonicParsing="false" text="Créditos">
+               <items>
+                 <MenuItem fx:id="openAutoria" mnemonicParsing="false" onAction="#handleAutoria" text="Acerca de" />
+               </items>
+             </Menu>
+             <Menu mnemonicParsing="false" text="Ayuda">
+               <items>
+                 <MenuItem fx:id="openAyuda" mnemonicParsing="false" onAction="#handleAyuda" text="Sistema de Ayuda" />
+               </items>
+             </Menu>
+           </menus>
+         </MenuBar>
+
+        <HBox alignment="CENTER_LEFT" prefHeight="60" style="-fx-background-color:#5E4AE3; -fx-padding:0 20 0 20;">
+
+            <Label style="-fx-font-size:16; -fx-font-weight:bold;" text="Adjuntar Justificantes de Faltas" textFill="WHITE" />
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <Button fx:id="btnVolver" onAction="#volver" style="-fx-background-color:white;                            -fx-text-fill:#5E4AE3;                            -fx-font-weight:bold;                            -fx-padding:6 14;" text="Volver" />
+
+        </HBox>
+
+    </VBox>
+	</top>
+	<center>
+		<VBox spacing="14" style="-fx-padding:20 24 12 24;">
+
+			<GridPane hgap="12" vgap="10">
+				<Label minWidth="140" text="Nombre documento:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+				<TextField fx:id="txtNombre" prefWidth="260" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+				<Label minWidth="140" text="Tipo:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+				<ComboBox fx:id="cboTipo" prefWidth="260" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+				<Label minWidth="140" text="Fichero seleccionado:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+				<Label fx:id="lblRuta" prefWidth="260" style="-fx-text-fill:#888;" text="Ningún fichero seleccionado" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <columnConstraints>
+               <ColumnConstraints />
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+			</GridPane>
+
+			<HBox spacing="10">
+				<Button fx:id="btnSeleccionar" onAction="#seleccionarFichero" prefWidth="150" style="-fx-background-color:#7f8c8d; -fx-text-fill:white;" text="Seleccionar fichero" />
+				<Button fx:id="btnAdjuntar" onAction="#adjuntar" prefWidth="110" style="-fx-background-color:#5E4AE3; -fx-text-fill:white; -fx-font-weight:bold;" text="Adjuntar" />
+				<Button fx:id="btnEliminar" onAction="#eliminar" prefWidth="160" style="-fx-background-color:#c0392b; -fx-text-fill:white;" text="Eliminar seleccionado" />
+			</HBox>
+
+			<Label fx:id="lblMensaje" style="-fx-font-size:12; -fx-font-weight:bold;" />
+
+			<Label style="-fx-font-weight:bold;" text="Justificantes adjuntados:" />
+			<TableView fx:id="tabla" VBox.vgrow="ALWAYS">
+				<columns>
+					<TableColumn fx:id="colNombre" prefWidth="220" text="Nombre" />
+					<TableColumn fx:id="colTipo" prefWidth="130" text="Tipo" />
+					<TableColumn fx:id="colRuta" prefWidth="240" text="Ruta" />
+				</columns>
+				<placeholder>
+					<Label text="No hay justificantes adjuntados." />
+				</placeholder>
+			</TableView>
+		</VBox>
+	</center>
+</BorderPane>

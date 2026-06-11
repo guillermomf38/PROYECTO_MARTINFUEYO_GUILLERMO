@@ -1,8 +1,12 @@
 /**
  *Clase Seguimiento.java
- * 
+ *
+ *Registra una entrada de seguimiento sobre una formación.
+ *Puede representar una falta (valoracion: JUSTIFICADA / INJUSTIFICADA)
+ *o una calificación (valoracion: APTO / NO APTO / PENDIENTE).
  *@author Guillermo Martin Fueyo
  *@version 1.0
+ *@see FormacionEmpresa
  */
 
 package com.luisdbb.tarea3AD2024base.modelo;
@@ -26,11 +30,11 @@ public class Seguimiento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idSeguimiento", unique = true, updatable = false, nullable = false)
 	private Long idSeguimiento;
-
+	/** Texto libre con las observaciones del tutor. */
 	private String observaciones;
 	private String valoracion;
 	private LocalDate fecha;
-
+	/** Formación a la que pertenece este seguimiento. */
 	@ManyToOne
 	@JoinColumn(name = "idFormacion")
 	private FormacionEmpresa formacion;
@@ -38,13 +42,19 @@ public class Seguimiento {
 	public Seguimiento() {
 
 	}
-
-	public Seguimiento(Long idSeguimiento, String observaciones,
-			String valoracion, LocalDate fecha) {
-		this.idSeguimiento = idSeguimiento;
+	/**
+	 * Crea un seguimiento para una formación.
+	 * @param observaciones texto del tutor
+	 * @param valoracion    calificación o tipo de falta
+	 * @param fecha         fecha del seguimiento
+	 * @param formacion     formación asociada
+	 */
+	public Seguimiento(String observaciones, String valoracion, LocalDate fecha,
+			FormacionEmpresa formacion) {
 		this.observaciones = observaciones;
 		this.valoracion = valoracion;
 		this.fecha = fecha;
+		this.formacion = formacion;
 	}
 
 	public Long getIdSeguimiento() {
@@ -74,5 +84,14 @@ public class Seguimiento {
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
+
+	public FormacionEmpresa getFormacion() {
+		return formacion;
+	}
+
+	public void setFormacion(FormacionEmpresa formacion) {
+		this.formacion = formacion;
+	}
+	
 
 }

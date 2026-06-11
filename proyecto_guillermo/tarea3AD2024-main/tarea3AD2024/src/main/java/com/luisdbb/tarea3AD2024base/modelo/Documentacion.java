@@ -1,8 +1,12 @@
 /**
  *Clase Documentacion.java
- * 
+ *
+ *Almacena metadatos de ficheros adjuntos por el estudiante
+ *como justificantes de faltas de asistencia.
+ *Vinculada a una FormacionEmpresa mediante idFormacion.
  *@author Guillermo Martin Fueyo
  *@version 1.0
+ *@see FormacionEmpresa
  */
 
 package com.luisdbb.tarea3AD2024base.modelo;
@@ -22,14 +26,18 @@ public class Documentacion {
 	@Column(name = "idDocumento",unique=true, updatable = false, nullable = false)
 	
 	private Long idDocumento;
+	/** Nombre descriptivo del documento. */
 	private String nombre;
 	private String tipo;
-
-	public Documentacion(Long idDocumento, String nombre, String tipo) {
-
-		this.idDocumento = idDocumento;
-		this.nombre = nombre;
-		this.tipo = tipo;
+	private String ruta;
+	/** FK de la FormacionEmpresa a la que pertenece. */
+	@Column(name = "idFormacion")
+	private Long idFormacion;
+	
+	public Documentacion(String nombre, String tipo, Long idFormacion) {
+	    this.nombre = nombre;
+	    this.tipo = tipo;
+	    this.idFormacion = idFormacion;
 	}
 
 	public Long getIdDocumento() {
@@ -54,6 +62,22 @@ public class Documentacion {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getRuta() {
+		return ruta;
+	}
+
+	public void setRuta(String ruta) {
+		this.ruta = ruta;
+	}
+
+	public Long getIdFormacion() {
+		return idFormacion;
+	}
+
+	public void setIdFormacion(Long idFormacion) {
+		this.idFormacion = idFormacion;
 	}
 
 

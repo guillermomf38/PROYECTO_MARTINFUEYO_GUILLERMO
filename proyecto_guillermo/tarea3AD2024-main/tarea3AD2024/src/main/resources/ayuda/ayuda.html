@@ -1,11 +1,205 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <title>Ayuda</title>
+
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        margin: 30px;
+        line-height: 1.6;
+    }
+
+    h1{
+        color: #2c3e50;
+    }
+
+    h2{
+        margin-top: 35px;
+        color: #34495e;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 5px;
+    }
+
+    ul{
+        margin-left: 20px;
+    }
+
+    li{
+        margin-bottom: 10px;
+    }
+</style>
+
 </head>
+
 <body>
+
 <h1>Bienvenido a la Ayuda de la Aplicación</h1>
-<p>Aquí encontrarás información sobre como usar la aplicación</p>
+
+<p>
+Aquí encontrarás información sobre cómo usar la aplicación.
+Cada sección corresponde a un perfil de usuario y describe
+sus funcionalidades y la forma de acceder a ellas.
+</p>
+
+
+<h2>2.1 Inicio de sesión</h2>
+
+<p>
+Introduce tu nombre de usuario y contraseña en los campos correspondientes
+y pulsa <strong>"Iniciar sesión"</strong>.
+</p>
+
+<p>
+Si las credenciales son incorrectas, aparecerá un mensaje en rojo.
+El sistema te redirigirá automáticamente al menú de tu perfil.
+</p>
+
+<p>
+Para salir, pulsa el botón <strong>"Cerrar sesión"</strong>
+visible en la cabecera de cualquier pantalla.
+</p>
+
+
+<h2>2.2 Perfil Administrador</h2>
+
+<p>
+El administrador dispone de control total sobre el sistema.
+Sus funcionalidades son:
+</p>
+
+<ul>
+    <li>
+        <strong>Asignar perfiles:</strong>
+        crea nuevos usuarios (Profesorado, Tutor Empresa o Estudiante)
+        seleccionando el tipo con el botón de radio, rellenando los datos
+        y pulsando "Crear usuario".
+    </li>
+
+    <li>
+        <strong>Gestionar tutores de centro:</strong>
+        permite alta, modificación, consulta y baja de profesores.
+    </li>
+
+    <li>
+        <strong>Gestionar periodos de prácticas:</strong>
+        crea y edita periodos FCT indicando nombre, fechas y curso académico.
+    </li>
+
+    <li>
+        <strong>Gestionar estudiantes:</strong>
+        visualiza y modifica estudiantes del sistema y asigna tutores.
+    </li>
+
+    <li>
+        <strong>Asociar periodos a tutor:</strong>
+        asigna o elimina periodos asociados a un tutor de centro.
+    </li>
+</ul>
+
+
+<h2>2.3 Perfil Profesorado (Tutor de Centro)</h2>
+
+<p>
+El tutor de centro gestiona empresas, estudiantes y asignaciones.
+</p>
+
+<ul>
+    <li>
+        <strong>Gestionar estudiantes:</strong>
+        administra únicamente los estudiantes de su grupo.
+    </li>
+
+    <li>
+        <strong>Gestionar empresas:</strong>
+        alta, modificación y baja de empresas colaboradoras.
+    </li>
+
+    <li>
+        <strong>Gestionar tutores de empresa:</strong>
+        administra los tutores asociados a cada empresa.
+    </li>
+
+    <li>
+        <strong>Asignación alumno → tutor empresa:</strong>
+        asigna estudiante, empresa, tutor y periodo de prácticas.
+    </li>
+
+    <li>
+        <strong>Modificar mis datos:</strong>
+        permite editar información personal y contraseña.
+    </li>
+</ul>
+
+
+<h2>2.4 Perfil Tutor de Empresa</h2>
+
+<p>
+El tutor de empresa supervisa directamente al estudiante.
+</p>
+
+<ul>
+    <li>
+        <strong>Registrar faltas de asistencia:</strong>
+        registra faltas justificadas o injustificadas.
+    </li>
+
+    <li>
+        <strong>Consultar datos de estudiantes:</strong>
+        visualiza información académica y empresarial.
+    </li>
+
+    <li>
+        <strong>Calificar estudiante:</strong>
+        registra valoraciones y observaciones.
+    </li>
+</ul>
+
+
+<h2>2.5 Perfil Estudiante</h2>
+
+<p>
+El estudiante accede a su información personal y de prácticas.
+</p>
+
+<ul>
+    <li>
+        <strong>Ver y modificar datos:</strong>
+        permite editar nombre, apellidos y contraseña.
+    </li>
+
+    <li>
+        <strong>Datos de empresa y tutor:</strong>
+        consulta la información de empresa y tutor asignado.
+    </li>
+
+    <li>
+        <strong>Adjuntar justificantes:</strong>
+        sube documentos PDF o imágenes justificativas.
+    </li>
+</ul>
+
+
+<h2>2.6 Navegación general</h2>
+
+<ul>
+    <li>
+        El menú principal muestra las opciones disponibles de cada perfil.
+    </li>
+
+    <li>
+        Todas las pantallas secundarias incluyen el botón "Volver".
+    </li>
+
+    <li>
+        Los mensajes de confirmación aparecen en verde y los errores en rojo.
+    </li>
+
+    <li>
+        Las acciones de eliminación solicitan confirmación previa.
+    </li>
+</ul>
+
 </body>
 </html>

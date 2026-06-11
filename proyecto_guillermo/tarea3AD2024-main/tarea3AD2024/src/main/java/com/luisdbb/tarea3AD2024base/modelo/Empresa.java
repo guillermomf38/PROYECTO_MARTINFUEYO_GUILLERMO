@@ -1,8 +1,12 @@
 /**
  *Clase Empresa.java
- * 
+ *
+ *Entidad que representa una empresa colaboradora en la que
+ *los estudiantes realizan su formación en empresa.
  *@author Guillermo Martin Fueyo
  *@version 1.0
+ *@see TutorEmpresa
+ *@see FormacionEmpresa
  */
 
 package com.luisdbb.tarea3AD2024base.modelo;
@@ -31,7 +35,7 @@ public class Empresa {
 	
 	@Column(unique=true)
 	private String email;
-	
+	/** Tutores de empresa pertenecientes a esta empresa. */
 	@OneToMany(mappedBy="empresa")
 	private List<TutorEmpresa> tutores;
 	
@@ -41,7 +45,13 @@ public class Empresa {
 	public Empresa() {
 		
 	}
-
+	/**
+	 * Crea una empresa con sus datos de contacto.
+	 * @param nombre    nombre comercial
+	 * @param direccion dirección física
+	 * @param telefono  teléfono de contacto
+	 * @param email     email único
+	 */
 	public Empresa(String nombre, String direccion,
 			String telefono, String email) {
 		this.nombre = nombre;

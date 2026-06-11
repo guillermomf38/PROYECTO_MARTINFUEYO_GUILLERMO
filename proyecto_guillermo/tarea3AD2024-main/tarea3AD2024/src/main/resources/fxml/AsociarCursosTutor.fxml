@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="560.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luisdbb.tarea3AD2024base.controller.AsociarCursosTutorController">
+    <top>
+      <VBox>
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="Créditos">
+                  <items>
+                    <MenuItem fx:id="openAutoria" mnemonicParsing="false" onAction="#handleAutoria" text="Acerca de" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Ayuda">
+                  <items>
+                    <MenuItem fx:id="openAyuda" mnemonicParsing="false" onAction="#handleAyuda" text="Sistema de Ayuda" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+              <HBox alignment="CENTER_LEFT" prefHeight="60" style="-fx-background-color: #5E4AE3; -fx-padding: 0 20 0 20;">
+                  <Label style="-fx-font-size:15; -fx-font-weight:bold;" text="Asociar Periodos de Prácticas a Tutor de Centro" textFill="WHITE" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="btnVolver" onAction="#volver" style="-fx-background-color:white; -fx-text-fill:#5E4AE3;                            -fx-font-weight:bold; -fx-padding:6 14;" text=" Volver" />
+              </HBox>
+         </children>
+      </VBox>
+    </top>
+    <center>
+        <VBox spacing="14" style="-fx-padding: 18 20 10 20;">
+
+            <!-- Selector de tutor -->
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label minWidth="130" style="-fx-font-weight:bold;" text="Tutor de centro:" />
+                <ComboBox fx:id="cboTutor" onAction="#onTutorSeleccionado" prefWidth="260" promptText="Selecciona tutor…" />
+            </HBox>
+
+         
+            <HBox alignment="CENTER" spacing="10" VBox.vgrow="ALWAYS">
+
+             
+                <VBox spacing="6" HBox.hgrow="ALWAYS">
+                    <Label style="-fx-font-weight:bold; -fx-font-size:13;" text="Periodos disponibles" />
+                    <TableView fx:id="tablaDisponibles" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colDispNombre" prefWidth="180" text="Nombre" />
+                            <TableColumn fx:id="colDispCurso" prefWidth="110" text="Curso académico" />
+                        </columns>
+                        <placeholder><Label text="No hay periodos disponibles." /></placeholder>
+                    </TableView>
+                </VBox>
+
+                
+                <VBox alignment="CENTER" minWidth="100" spacing="12">
+                    <Button fx:id="btnAsignar" onAction="#asignar" prefWidth="90" style="-fx-background-color:#5E4AE3; -fx-text-fill:white; -fx-font-weight:bold;" text="Asignar " />
+                    <Button fx:id="btnDesasignar" onAction="#desasignar" prefWidth="90" style="-fx-background-color:#c0392b; -fx-text-fill:white;" text=" Quitar" />
+                </VBox>
+
+               
+                <VBox spacing="6" HBox.hgrow="ALWAYS">
+                    <Label style="-fx-font-weight:bold; -fx-font-size:13;" text="Periodos asignados al tutor" />
+                    <TableView fx:id="tablaAsignados" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colAsigNombre" prefWidth="180" text="Nombre" />
+                            <TableColumn fx:id="colAsigCurso" prefWidth="110" text="Curso académico" />
+                        </columns>
+                        <placeholder><Label text="Sin periodos asignados." /></placeholder>
+                    </TableView>
+                </VBox>
+            </HBox>
+
+            <Label fx:id="lblMensaje" style="-fx-font-size:12; -fx-font-weight:bold;" />
+        </VBox>
+    </center>
+</BorderPane>

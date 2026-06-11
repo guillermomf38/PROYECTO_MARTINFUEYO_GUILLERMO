@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="560.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luisdbb.tarea3AD2024base.controller.RegistrarFaltasController">
+	<top>
+      <VBox>
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="Créditos">
+                  <items>
+                    <MenuItem fx:id="openAutoria" mnemonicParsing="false" onAction="#handleAutoria" text="Acerca de" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Ayuda">
+                  <items>
+                    <MenuItem fx:id="openAyuda" mnemonicParsing="false" onAction="#handleAyuda" text="Sistema de Ayuda" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+      		<HBox alignment="CENTER_LEFT" prefHeight="60" style="-fx-background-color:#5E4AE3; -fx-padding:0 20 0 20;">
+      			<Label style="-fx-font-size:16; -fx-font-weight:bold;" text="Registrar Faltas de Asistencia" textFill="WHITE" />
+      			<Region HBox.hgrow="ALWAYS" />
+      			<Button fx:id="btnVolver" onAction="#volver" style="-fx-background-color:white; -fx-text-fill:#5E4AE3;                            -fx-font-weight:bold; -fx-padding:6 14;" text=" Volver" />
+      		</HBox>
+         </children>
+      </VBox>
+	</top>
+	<center>
+		<VBox spacing="12" style="-fx-padding:18 20 10 20;">
+
+			<GridPane hgap="12" vgap="10">
+				<Label minWidth="110" text="Estudiante:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+				<ComboBox fx:id="cboEstudiante" onAction="#onEstudianteSeleccionado" prefWidth="240" promptText="Selecciona estudiante…" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+				<Label minWidth="110" text="Fecha:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+				<DatePicker fx:id="dpFecha" prefWidth="240" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+				<Label minWidth="110" text="Tipo:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+				<HBox spacing="12" GridPane.columnIndex="1" GridPane.rowIndex="2">
+					<RadioButton fx:id="rdJustificada" text="Justificada" />
+					<RadioButton fx:id="rdInjustificada" text="Injustificada" />
+				</HBox>
+
+				<Label minWidth="110" text="Observaciones:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+				<TextArea fx:id="txtObservaciones" prefHeight="60" prefWidth="240" promptText="Motivo o anotación (opcional)" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <columnConstraints>
+               <ColumnConstraints />
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+			</GridPane>
+
+			<HBox spacing="10">
+				<Button fx:id="btnRegistrarFalta" onAction="#registrarFalta" prefWidth="140" style="-fx-background-color:#5E4AE3; -fx-text-fill:white; -fx-font-weight:bold;" text="Registrar falta" />
+				<Button fx:id="btnLimpiar" onAction="#limpiar" prefWidth="100" style="-fx-background-color:#7f8c8d; -fx-text-fill:white;" text="Limpiar" />
+			</HBox>
+
+			<Label fx:id="lblMensaje" style="-fx-font-size:12; -fx-font-weight:bold;" />
+
+			<Label style="-fx-font-weight:bold;" text="Historial de faltas del estudiante seleccionado:" />
+			<TableView fx:id="tablaFaltas" VBox.vgrow="ALWAYS">
+				<columns>
+					<TableColumn fx:id="colFecha" prefWidth="110" text="Fecha" />
+					<TableColumn fx:id="colTipo" prefWidth="130" text="Tipo" />
+					<TableColumn fx:id="colObservacion" prefWidth="350" text="Observaciones" />
+				</columns>
+				<placeholder>
+					<Label text="Sin faltas registradas." />
+				</placeholder>
+			</TableView>
+		</VBox>
+	</center>
+</BorderPane>

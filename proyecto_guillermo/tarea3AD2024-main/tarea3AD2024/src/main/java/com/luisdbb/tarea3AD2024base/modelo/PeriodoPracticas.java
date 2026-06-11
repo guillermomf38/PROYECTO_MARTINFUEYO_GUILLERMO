@@ -1,8 +1,13 @@
 /**
  *Clase PeriodoPracticas.java
- * 
+ *
+ *Entidad que representa un periodo de FCT dentro de un
+ *curso académico (ordinario, extraordinario, 1º o 2º).
+ *El Profesorado actúa como coordinador del periodo.
  *@author Guillermo Martin Fueyo
  *@version 1.0
+ *@see FormacionEmpresa
+ *@see Profesorado
  */
 
 package com.luisdbb.tarea3AD2024base.modelo;
@@ -16,6 +21,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -31,6 +38,10 @@ public class PeriodoPracticas {
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
 	private String cursoAcademico;
+	/** Tutor coordinador del periodo. FK idProfesorado. */
+	@ManyToOne
+	@JoinColumn(name = "idProfesorado")
+	private Profesorado coordinador;
 	
 	@OneToMany(mappedBy="periodoPracticas")
 	private List<FormacionEmpresa> formaciones =new ArrayList<>();;
@@ -88,5 +99,12 @@ public class PeriodoPracticas {
 	public void setFormaciones(List<FormacionEmpresa> formaciones) {
 		this.formaciones = formaciones;
 	}
+	public Profesorado getCoordinador() {
+		return coordinador;
+	}
+	public void setCoordinador(Profesorado coordinador) {
+		this.coordinador = coordinador;
+	}
+	
 
 }

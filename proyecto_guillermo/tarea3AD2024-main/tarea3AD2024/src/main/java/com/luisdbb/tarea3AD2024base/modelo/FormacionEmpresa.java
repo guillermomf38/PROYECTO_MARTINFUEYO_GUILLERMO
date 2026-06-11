@@ -1,8 +1,16 @@
 /**
  *Clase FormacionEmpresa.java
- * 
+ *
+ *Entidad central del sistema. Representa la asignación de un
+ *estudiante a una empresa durante un periodo de prácticas.
+ *Si la empresa devuelve al estudiante, activa pasa a false
+ *y se crea un nuevo registro con la nueva asignación.
  *@author Guillermo Martin Fueyo
  *@version 1.0
+ *@see Estudiante
+ *@see Empresa
+ *@see TutorEmpresa
+ *@see PeriodoPracticas
  */
 
 package com.luisdbb.tarea3AD2024base.modelo;
@@ -38,14 +46,20 @@ public class FormacionEmpresa {
 	@ManyToOne
 	@JoinColumn(name = "idPeriodo")
 	private PeriodoPracticas periodoPracticas;
-
+	/** true mientras la formación está en curso. */
 	@Column(nullable = false)
 	private boolean activa;
 
 	protected FormacionEmpresa() {
 
 	}
-
+	/**
+	 * Crea una formación activa. activa se inicializa a true.
+	 * @param estudiante       alumno que realiza la formación
+	 * @param empresa          empresa donde se realiza
+	 * @param tutorEmpresa     tutor asignado en la empresa
+	 * @param periodoPracticas periodo de FCT correspondiente
+	 */
 	public FormacionEmpresa(Estudiante estudiante, Empresa empresa,
 			TutorEmpresa tutorEmpresa, PeriodoPracticas periodoPracticas) {
 		super();

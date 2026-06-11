@@ -1,8 +1,13 @@
 /**
  *Clase Usuario
  * 
+ *Entidad base que representa a cualquier usuario del sistema.
+ *Superclase de la jerarquía JPA con estrategia JOINED.
+ *Cada subclase tiene su propia tabla unida mediante la PK.
+
  *@author Guillermo Martin Fueyo
  *@version 1.0
+ *@see Perfil
  */
 
 package com.luisdbb.tarea3AD2024base.modelo;
@@ -22,11 +27,11 @@ import jakarta.persistence.Table;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Usuario")
 public class Usuario {
-
+	/** Nombre de usuario único para el acceso al sistema. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long idUsuario;
-
+	/** Contraseña de acceso. Protected para herencia. */
 	@Column(unique = true, nullable = false)
 	private String usuario;
 
@@ -36,11 +41,18 @@ public class Usuario {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private Perfil perfil;
+	
+	
 
 	public Usuario() {
 
 	}
-
+	/**
+	 * Crea un usuario con credenciales y perfil.
+	 * @param usuario    nombre de usuario único
+	 * @param contrasena contraseña de acceso
+	 * @param perfil     rol del usuario en el sistema
+	 */
 	public Usuario(String usuario, String contrasena, Perfil perfil) {
 
 		this.usuario = usuario;
