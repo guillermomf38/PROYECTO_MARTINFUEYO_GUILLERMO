@@ -251,7 +251,7 @@ public class AsignarPerfilController implements Initializable {
 
 	private void mostrarError(String mensaje) {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
-		alert.setTitle("Error");
+		alert.setTitle("Error: ");
 		alert.setHeaderText(null);
 		alert.setContentText(mensaje);
 		alert.showAndWait();
@@ -259,7 +259,7 @@ public class AsignarPerfilController implements Initializable {
 
 	private void mostrarCorrecto(String mensaje) {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setTitle("Registrado Correctamente");
+		alert.setTitle("Registrado Correctamente: ");
 		alert.setHeaderText(null);
 		alert.setContentText(mensaje);
 		alert.showAndWait();

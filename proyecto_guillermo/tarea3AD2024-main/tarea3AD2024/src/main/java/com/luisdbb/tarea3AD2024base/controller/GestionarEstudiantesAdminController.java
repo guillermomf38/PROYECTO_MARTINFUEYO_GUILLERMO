@@ -317,6 +317,10 @@ public class GestionarEstudiantesAdminController implements Initializable {
 			error("Usuario, nombre y apellidos son obligatorios.");
 			return false;
 		}
+		if (cboCurso.getValue() == null || cboCurso.getValue().isBlank()) {
+		    error("El curso es obligatorio.");
+		    return false;
+		}
 		if (esNuevo) {
 			if (passContrasena.getText().isBlank()) {
 				error("La contraseña es obligatoria al crear un estudiante.");
@@ -339,12 +343,12 @@ public class GestionarEstudiantesAdminController implements Initializable {
 
 	private void ok(String msg) {
 		lblMensaje.setStyle("-fx-text-fill:#27ae60;");
-		lblMensaje.setText("Correcto" + msg);
+		lblMensaje.setText("Correcto: " + msg);
 	}
 
 	private void error(String msg) {
 		lblMensaje.setStyle("-fx-text-fill:#c0392b;");
-		lblMensaje.setText("Error" + msg);
+		lblMensaje.setText("Error: " + msg);
 	}
 
 	private void limpiarMensaje() {

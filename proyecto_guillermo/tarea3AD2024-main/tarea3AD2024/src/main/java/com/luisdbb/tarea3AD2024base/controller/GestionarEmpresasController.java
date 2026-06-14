@@ -11,9 +11,14 @@
 
 package com.luisdbb.tarea3AD2024base.controller;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -42,6 +47,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.web.WebView;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -67,7 +73,8 @@ public class GestionarEmpresasController implements Initializable {
 	private Button btnEliminar;
 	@FXML
 	private Button btnLimpiar;
-
+	@FXML 
+	private Button btnExportar;
 	@FXML
 	private TableView<Empresa> tabla;
 	@FXML
@@ -159,7 +166,7 @@ public class GestionarEmpresasController implements Initializable {
 		String email = txtEmail.getText().trim();
 		if (empresaService.existeEmail(email)) {
 		
-			lblMensaje.showError("El email '" + email
+			lblMensaje.showError(" El email '" + email
 					+ "' ya está registrado por otra empresa.");
 			return;
 		}
@@ -188,7 +195,7 @@ public class GestionarEmpresasController implements Initializable {
 	private void modificar(ActionEvent event) {
 		if (seleccionada == null) {
 		
-			lblMensaje.showError("Selecciona una empresa para modificar.");
+			lblMensaje.showError(" Selecciona una empresa para modificar.");
 			return;
 		}
 		if (!validar())
@@ -197,7 +204,7 @@ public class GestionarEmpresasController implements Initializable {
 		if (!email.equals(seleccionada.getEmail())
 				&& empresaService.existeEmail(email)) {
 			
-			lblMensaje.showError("El email '" + email + "' ya está en uso por otra empresa.");
+			lblMensaje.showError(" El email '" + email + "' ya está en uso por otra empresa.");
 			return;
 		}
 		try {
@@ -209,7 +216,7 @@ public class GestionarEmpresasController implements Initializable {
 			cargarDatos();
 			limpiar(null);
 			
-			lblMensaje.showOk("Empresa modificada correctamente.");
+			lblMensaje.showOk(" Empresa modificada correctamente.");
 		} catch (Exception ex) {
 			
 			lblMensaje.showError("Error al modificar: " + ex.getMessage());
@@ -225,7 +232,7 @@ public class GestionarEmpresasController implements Initializable {
 	private void eliminar(ActionEvent event) {
 		if (seleccionada == null) {
 		
-			lblMensaje.showError("Selecciona una empresa para eliminar.");
+			lblMensaje.showError(" Selecciona una empresa para eliminar.");
 			return;
 		}
 		Alert c = new Alert(Alert.AlertType.CONFIRMATION);
@@ -242,10 +249,60 @@ public class GestionarEmpresasController implements Initializable {
 					lblMensaje.showOk("Empresa eliminada.");
 				} catch (Exception ex) {
 				
-					lblMensaje.showError("No se puede eliminar: la empresa tiene tutores o formaciones asociadas.");
+					lblMensaje.showError(" No se puede eliminar: la empresa tiene tutores o formaciones asociadas.");
 				}
 			}
 		});
+	}
+	
+	@FXML
+	private void exportarCSV(ActionEvent event) {
+		 if (seleccionada == null) {
+		        error(" Selecciona una empresa de la tabla para exportar.");
+		        return;
+		    }
+
+		    FileChooser fileChooser = new FileChooser();
+		    fileChooser.setTitle("Exportar empresa a CSV");
+		    fileChooser.setInitialFileName(seleccionada.getNombre() + ".csv");
+		    fileChooser.getExtensionFilters().add(
+		            new FileChooser.ExtensionFilter("Fichero CSV (*.csv)", "*.csv"));
+
+		    File fichero = fileChooser.showSaveDialog(btnExportar.getScene().getWindow());
+		    if (fichero == null) return;
+
+		    try (BufferedWriter bw = new BufferedWriter(
+		            new OutputStreamWriter(new FileOutputStream(fichero), StandardCharsets.UTF_8))) {
+
+		        
+		        bw.write('\uFEFF');
+
+		       
+		        bw.write("Nombre;Dirección;Teléfono;Email");
+		        bw.newLine();
+
+		      
+		        bw.write(
+		            escaparCSV(seleccionada.getNombre())    + ";" +
+		            escaparCSV(seleccionada.getDireccion()) + ";" +
+		            escaparCSV(seleccionada.getTelefono())  + ";" +
+		            escaparCSV(seleccionada.getEmail())
+		        );
+		        bw.newLine();
+
+		        ok("Empresa exportada correctamente: " + fichero.getName());
+
+		    } catch (IOException ex) {
+		        error("Error al exportar: " + ex.getMessage());
+		    }
+	}
+	private String escaparCSV(String valor) {
+	    if (valor == null) return "";
+	   
+	    if (valor.contains(",") || valor.contains("\"") || valor.contains("\n")) {
+	        return "\"" + valor.replace("\"", "\"\"") + "\"";
+	    }
+	    return valor;
 	}
 
 	/**
@@ -282,7 +339,7 @@ public class GestionarEmpresasController implements Initializable {
 	private boolean validar() {
 		if (txtNombre.getText().isBlank() || txtEmail.getText().isBlank()) {
 		
-			lblMensaje.showError("Nombre y email son obligatorios.");
+			lblMensaje.showError(" Nombre y email son obligatorios.");
 			return false;
 		}
 		return true;
@@ -350,6 +407,16 @@ public class GestionarEmpresasController implements Initializable {
 			alert.setContentText("Por favor, verifica que el archivo 'ayuda.html' este en la ruta '/ayuda/ayuda.html'");
 			alert.showAndWait();
 		}
+	}
+  
+	private void ok(String msg) {
+		lblMensaje.setStyle("-fx-text-fill:#27ae60;");
+		lblMensaje.setText("Correcto: " + msg);
+	}
+
+	private void error(String msg) {
+		lblMensaje.setStyle("-fx-text-fill:#c0392b;");
+		lblMensaje.setText("Error: " + msg);
 	}
 	
 

@@ -17,71 +17,107 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="570.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luisdbb.tarea3AD2024base.controller.GestionarEmpresasController">
+<BorderPane prefHeight="570.0" prefWidth="780.0"
+	xmlns="http://javafx.com/javafx/23.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.luisdbb.tarea3AD2024base.controller.GestionarEmpresasController">
 	<top>
-      <VBox>
-         <children>
-            <MenuBar>
-              <menus>
-                <Menu mnemonicParsing="false" text="Créditos">
-                  <items>
-                    <MenuItem fx:id="openAutoria" mnemonicParsing="false" onAction="#handleAutoria" text="Acerca de" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Ayuda">
-                  <items>
-                    <MenuItem fx:id="openAyuda" mnemonicParsing="false" onAction="#handleAyuda" text="Sistema de Ayuda" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-      		<HBox alignment="CENTER_LEFT" prefHeight="60" style="-fx-background-color: #5E4AE3; -fx-padding: 0 20 0 20;">
-      			<Label style="-fx-font-size:16; -fx-font-weight:bold;" text="Gestionar Empresas" textFill="WHITE" />
-      			<Region HBox.hgrow="ALWAYS" />
-      			<Button fx:id="btnVolver" onAction="#volver" style="-fx-background-color:white; -fx-text-fill:#5E4AE3;                            -fx-font-weight:bold; -fx-padding:6 14;" text=" Volver" />
-      		</HBox>
-         </children>
-      </VBox>
+		<VBox>
+			<children>
+				<MenuBar>
+					<menus>
+						<Menu mnemonicParsing="false" text="Créditos">
+							<items>
+								<MenuItem fx:id="openAutoria" mnemonicParsing="false"
+									onAction="#handleAutoria" text="Acerca de" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Ayuda">
+							<items>
+								<MenuItem fx:id="openAyuda" mnemonicParsing="false"
+									onAction="#handleAyuda" text="Sistema de Ayuda" />
+							</items>
+						</Menu>
+					</menus>
+				</MenuBar>
+				<HBox alignment="CENTER_LEFT" prefHeight="60"
+					style="-fx-background-color: #5E4AE3; -fx-padding: 0 20 0 20;">
+					<Label style="-fx-font-size:16; -fx-font-weight:bold;"
+						text="Gestionar Empresas" textFill="WHITE" />
+					<Region HBox.hgrow="ALWAYS" />
+					<Button fx:id="btnVolver" onAction="#volver"
+						style="-fx-background-color:white; -fx-text-fill:#5E4AE3;                            -fx-font-weight:bold; -fx-padding:6 14;"
+						text=" Volver" />
+				</HBox>
+			</children>
+		</VBox>
 	</top>
 	<center>
 		<VBox spacing="12" style="-fx-padding: 18 20 10 20;">
 
 			<GridPane hgap="10" vgap="8">
-				<Label minWidth="90" text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-				<TextField fx:id="txtNombre" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-				<Label minWidth="90" text="Teléfono:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-				<TextField fx:id="txtTelefono" prefWidth="160" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+				<Label minWidth="90" text="Nombre:" GridPane.columnIndex="0"
+					GridPane.rowIndex="0" />
+				<TextField fx:id="txtNombre" prefWidth="200"
+					GridPane.columnIndex="1" GridPane.rowIndex="0" />
+				<Label minWidth="90" text="Teléfono:" GridPane.columnIndex="2"
+					GridPane.rowIndex="0" />
+				<TextField fx:id="txtTelefono" prefWidth="160"
+					GridPane.columnIndex="3" GridPane.rowIndex="0" />
 
-				<Label minWidth="90" text="Dirección:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-				<TextField fx:id="txtDireccion" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-				<Label minWidth="90" text="Email:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-				<TextField fx:id="txtEmail" prefWidth="160" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <columnConstraints>
-               <ColumnConstraints />
-               <ColumnConstraints />
-               <ColumnConstraints />
-               <ColumnConstraints />
-            </columnConstraints>
-            <rowConstraints>
-               <RowConstraints />
-               <RowConstraints />
-            </rowConstraints>
+				<Label minWidth="90" text="Dirección:"
+					GridPane.columnIndex="0" GridPane.rowIndex="1" />
+				<TextField fx:id="txtDireccion" prefWidth="200"
+					GridPane.columnIndex="1" GridPane.rowIndex="1" />
+				<Label minWidth="90" text="Email:" GridPane.columnIndex="2"
+					GridPane.rowIndex="1" />
+				<TextField fx:id="txtEmail" prefWidth="160"
+					GridPane.columnIndex="3" GridPane.rowIndex="1" />
+				<columnConstraints>
+					<ColumnConstraints />
+					<ColumnConstraints />
+					<ColumnConstraints />
+					<ColumnConstraints />
+				</columnConstraints>
+				<rowConstraints>
+					<RowConstraints />
+					<RowConstraints />
+				</rowConstraints>
 			</GridPane>
 
 			<HBox spacing="10">
-				<Button fx:id="btnGuardar" onAction="#guardar" prefWidth="100" style="-fx-background-color:#5E4AE3; -fx-text-fill:white; -fx-font-weight:bold;" text="Guardar" />
-				<Button fx:id="btnModificar" onAction="#modificar" prefWidth="100" style="-fx-background-color:#5E4AE3; -fx-text-fill:white;" text="Modificar" />
-				<Button fx:id="btnEliminar" onAction="#eliminar" prefWidth="100" style="-fx-background-color:#c0392b; -fx-text-fill:white;" text="Eliminar" />
-				<Button fx:id="btnLimpiar" onAction="#limpiar" prefWidth="100" style="-fx-background-color:#7f8c8d; -fx-text-fill:white;" text="Limpiar" />
+				<Button fx:id="btnGuardar" onAction="#guardar"
+					prefWidth="100"
+					style="-fx-background-color:#5E4AE3; -fx-text-fill:white; -fx-font-weight:bold;"
+					text="Guardar" />
+				<Button fx:id="btnModificar" onAction="#modificar"
+					prefWidth="100"
+					style="-fx-background-color:#5E4AE3; -fx-text-fill:white;"
+					text="Modificar" />
+				<Button fx:id="btnEliminar" onAction="#eliminar"
+					prefWidth="100"
+					style="-fx-background-color:#c0392b; -fx-text-fill:white;"
+					text="Eliminar" />
+				<Button fx:id="btnExportar" text="Exportar CSV"
+					onAction="#exportarCSV" prefWidth="140"
+					style="-fx-background-color:#2980b9; -fx-text-fill:white; -fx-font-weight:bold;" />
+				<Button fx:id="btnLimpiar" onAction="#limpiar"
+					prefWidth="100"
+					style="-fx-background-color:#7f8c8d; -fx-text-fill:white;"
+					text="Limpiar" />
 			</HBox>
-         <MensajeLabel fx:id="lblMensaje" />
+			<MensajeLabel fx:id="lblMensaje" />
 
 			<TableView fx:id="tabla" VBox.vgrow="ALWAYS">
 				<columns>
-					<TableColumn fx:id="colNombre" prefWidth="180" text="Nombre" />
-					<TableColumn fx:id="colDireccion" prefWidth="200" text="Dirección" />
-					<TableColumn fx:id="colTelefono" prefWidth="110" text="Teléfono" />
-					<TableColumn fx:id="colEmail" prefWidth="190" text="Email" />
+					<TableColumn fx:id="colNombre" prefWidth="180"
+						text="Nombre" />
+					<TableColumn fx:id="colDireccion" prefWidth="200"
+						text="Dirección" />
+					<TableColumn fx:id="colTelefono" prefWidth="110"
+						text="Teléfono" />
+					<TableColumn fx:id="colEmail" prefWidth="190"
+						text="Email" />
 				</columns>
 				<placeholder>
 					<Label text="No hay empresas registradas." />

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-02-2026 a las 16:23:40
+-- Tiempo de generación: 14-06-2026 a las 13:25:49
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -40,8 +40,17 @@ CREATE TABLE `administrador` (
 CREATE TABLE `documentacion` (
   `id_documento` bigint(20) NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
-  `tipo` varchar(255) DEFAULT NULL
+  `tipo` varchar(255) DEFAULT NULL,
+  `id_formacion` bigint(20) DEFAULT NULL,
+  `ruta` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `documentacion`
+--
+
+INSERT INTO `documentacion` (`id_documento`, `nombre`, `tipo`, `id_formacion`, `ruta`) VALUES
+(6, 'justificante', 'Justificante médico', 6, 'C:\\Users\\guill\\Documents\\justuficante.docx');
 
 -- --------------------------------------------------------
 
@@ -57,6 +66,14 @@ CREATE TABLE `empresa` (
   `telefono` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `empresa`
+--
+
+INSERT INTO `empresa` (`id_empresa`, `direccion`, `email`, `nombre`, `telefono`) VALUES
+(1, 'Plaza Europa 3', 'soft@innovaSoft.es', 'InnovaSoft', '985334120'),
+(2, 'c/ Rio Nalon 8', 'soporte@bluenet.es', 'BlueNetSistemas', '984998654');
+
 -- --------------------------------------------------------
 
 --
@@ -70,6 +87,14 @@ CREATE TABLE `estudiante` (
   `id_usuario` bigint(20) NOT NULL,
   `id_profesorado` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `estudiante`
+--
+
+INSERT INTO `estudiante` (`apellidos`, `curso`, `nombre`, `id_usuario`, `id_profesorado`) VALUES
+('Navarro Mendez', '2@IFC303', 'Pablo', 5, 2),
+('Fernandez Ruiz', '2IFC303', 'Carmen', 6, 1);
 
 -- --------------------------------------------------------
 
@@ -86,6 +111,14 @@ CREATE TABLE `formacion_empresa` (
   `id_tutor_empresa` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `formacion_empresa`
+--
+
+INSERT INTO `formacion_empresa` (`id_formacion`, `activa`, `id_empresa`, `id_estudiante`, `id_periodo`, `id_tutor_empresa`) VALUES
+(5, b'1', 1, 6, 1, 3),
+(6, b'1', 2, 5, 2, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -97,8 +130,17 @@ CREATE TABLE `periodo_practicas` (
   `curso_academico` varchar(255) DEFAULT NULL,
   `fecha_fin` date DEFAULT NULL,
   `fecha_inicio` date DEFAULT NULL,
-  `nombre_periodo` varchar(255) DEFAULT NULL
+  `nombre_periodo` varchar(255) DEFAULT NULL,
+  `id_profesorado` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `periodo_practicas`
+--
+
+INSERT INTO `periodo_practicas` (`id_periodo`, `curso_academico`, `fecha_fin`, `fecha_inicio`, `nombre_periodo`, `id_profesorado`) VALUES
+(1, '2025-2026', '2026-05-05', '2026-02-03', 'FE 1', 1),
+(2, '2025-2026', '2026-09-17', '2026-06-08', 'FE 2', 2);
 
 -- --------------------------------------------------------
 
@@ -112,6 +154,14 @@ CREATE TABLE `profesorado` (
   `nombre` varchar(255) DEFAULT NULL,
   `id_usuario` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `profesorado`
+--
+
+INSERT INTO `profesorado` (`apellidos`, `email`, `nombre`, `id_usuario`) VALUES
+('Perez Garcia', 'juanperez@centro.es', 'Juan', 1),
+('Lopez Fernandez', 'maria@centro.es', 'Maria', 2);
 
 -- --------------------------------------------------------
 
@@ -127,6 +177,17 @@ CREATE TABLE `seguimiento` (
   `id_formacion` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `seguimiento`
+--
+
+INSERT INTO `seguimiento` (`id_seguimiento`, `fecha`, `observaciones`, `valoracion`, `id_formacion`) VALUES
+(8, '2026-06-13', '', 'JUSTIFICADA', 5),
+(9, '2026-06-04', 'sin aviso previo', 'INJUSTIFICADA', 5),
+(10, '2026-06-14', 'Gran Evolucion', 'APTO', 5),
+(11, '2026-06-01', '', 'JUSTIFICADA', 6),
+(12, '2026-06-14', 'pocos conocimientos técnicos', 'NO APTO', 6);
+
 -- --------------------------------------------------------
 
 --
@@ -140,6 +201,14 @@ CREATE TABLE `tutor_empresa` (
   `id_usuario` bigint(20) NOT NULL,
   `id_empresa` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tutor_empresa`
+--
+
+INSERT INTO `tutor_empresa` (`apellidos`, `email`, `nombre`, `id_usuario`, `id_empresa`) VALUES
+('Castro Nuñez', 'robertocastro@centro.es', 'Roberto', 3, 1),
+('Martin Suarez', 'martin@centro.es', 'Laura', 4, 2);
 
 -- --------------------------------------------------------
 
@@ -159,7 +228,12 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `contrasena`, `perfil`, `usuario`) VALUES
-(1, 'admin', 'ADMINISTRADOR', 'admin');
+(1, 'jperez12', 'PROFESORADO', 'jperez'),
+(2, 'marialopez', 'PROFESORADO', 'mlopez'),
+(3, 'rcastro', 'TUTOREMPRESA', 'rcastro'),
+(4, 'laura1', 'TUTOREMPRESA', 'lmartin'),
+(5, 'pablor', 'ESTUDIANTE', 'pnavarro'),
+(6, 'carmen123', 'ESTUDIANTE', 'cfernandez');
 
 --
 -- Índices para tablas volcadas
@@ -205,7 +279,8 @@ ALTER TABLE `formacion_empresa`
 -- Indices de la tabla `periodo_practicas`
 --
 ALTER TABLE `periodo_practicas`
-  ADD PRIMARY KEY (`id_periodo`);
+  ADD PRIMARY KEY (`id_periodo`),
+  ADD KEY `FKat5ic4rnec0b1b42ujm1chll5` (`id_profesorado`);
 
 --
 -- Indices de la tabla `profesorado`
@@ -244,37 +319,37 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `documentacion`
 --
 ALTER TABLE `documentacion`
-  MODIFY `id_documento` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_documento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `id_empresa` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_empresa` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `formacion_empresa`
 --
 ALTER TABLE `formacion_empresa`
-  MODIFY `id_formacion` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_formacion` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `periodo_practicas`
 --
 ALTER TABLE `periodo_practicas`
-  MODIFY `id_periodo` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_periodo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `seguimiento`
 --
 ALTER TABLE `seguimiento`
-  MODIFY `id_seguimiento` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_seguimiento` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
@@ -301,6 +376,12 @@ ALTER TABLE `formacion_empresa`
   ADD CONSTRAINT `FK6lg6p3ib22y4ww4a6wu65jgsl` FOREIGN KEY (`id_tutor_empresa`) REFERENCES `tutor_empresa` (`id_usuario`),
   ADD CONSTRAINT `FKc0h7ovpc5qqr24wyttfkw2ggi` FOREIGN KEY (`id_periodo`) REFERENCES `periodo_practicas` (`id_periodo`),
   ADD CONSTRAINT `FKofj00jwpvhgaa0wfa5f58xlxp` FOREIGN KEY (`id_estudiante`) REFERENCES `estudiante` (`id_usuario`);
+
+--
+-- Filtros para la tabla `periodo_practicas`
+--
+ALTER TABLE `periodo_practicas`
+  ADD CONSTRAINT `FKat5ic4rnec0b1b42ujm1chll5` FOREIGN KEY (`id_profesorado`) REFERENCES `profesorado` (`id_usuario`);
 
 --
 -- Filtros para la tabla `profesorado`

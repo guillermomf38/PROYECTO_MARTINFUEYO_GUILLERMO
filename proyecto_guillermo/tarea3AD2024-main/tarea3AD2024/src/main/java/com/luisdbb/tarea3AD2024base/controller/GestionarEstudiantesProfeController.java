@@ -22,7 +22,9 @@ import org.springframework.stereotype.Controller;
 import com.luisdbb.tarea3AD2024base.config.StageManager;
 import com.luisdbb.tarea3AD2024base.modelo.Estudiante;
 import com.luisdbb.tarea3AD2024base.modelo.Profesorado;
+import com.luisdbb.tarea3AD2024base.modelo.Usuario;
 import com.luisdbb.tarea3AD2024base.services.EstudianteService;
+import com.luisdbb.tarea3AD2024base.services.ProfesoradoService;
 import com.luisdbb.tarea3AD2024base.services.SesionService;
 import com.luisdbb.tarea3AD2024base.view.FxmlView;
 
@@ -87,7 +89,8 @@ public class GestionarEstudiantesProfeController implements Initializable {
 	private TableColumn<Estudiante, String> colCurso;
 	@FXML
 	private MenuItem openAutoria;
-	
+	@Autowired
+	private ProfesoradoService profesoradoService;
 	@FXML
 	private MenuItem openAyuda;
 	@Lazy
@@ -120,7 +123,12 @@ public class GestionarEstudiantesProfeController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		 tutorLogueado = sesionService.getProfesradoLogueado();
+		Usuario u = sesionService.getUsuarioLogueado();
+	    
+	    if (u != null) {
+	        tutorLogueado = profesoradoService.findById(u.getIdUsuario());
+	    }
+	    System.out.println("tutorLogueado: " + (tutorLogueado != null ? tutorLogueado.getNombre() + " id=" + tutorLogueado.getIdUsuario() : "NULL"));
 		    cboCurso.setItems(FXCollections.observableArrayList(CURSOS));
 		    configurarTabla();
 		    cargarDatos();
@@ -309,12 +317,12 @@ public class GestionarEstudiantesProfeController implements Initializable {
 
 	private void ok(String msg) {
 		lblMensaje.setStyle("-fx-text-fill:#27ae60;");
-		lblMensaje.setText("Correcto " + msg);
+		lblMensaje.setText("Correcto: " + msg);
 	}
 
 	private void error(String msg) {
 		lblMensaje.setStyle("-fx-text-fill:#c0392b;");
-		lblMensaje.setText("Error" + msg);
+		lblMensaje.setText("Error: " + msg);
 	}
 
 	private void limpiarMensaje() {

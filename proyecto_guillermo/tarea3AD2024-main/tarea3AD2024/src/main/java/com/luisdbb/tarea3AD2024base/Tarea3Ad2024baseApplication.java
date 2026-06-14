@@ -1,5 +1,6 @@
 package com.luisdbb.tarea3AD2024base;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -8,6 +9,7 @@ import com.luisdbb.tarea3AD2024base.view.FxmlView;
 import com.luisdbb.tarea3AD2024base.config.StageManager;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 
 @SpringBootApplication
@@ -45,5 +47,6 @@ public class Tarea3Ad2024baseApplication extends Application {
 		String[] args = getParameters().getRaw().stream().toArray(String[]::new);
 		return builder.run(args);
 	}
+
 
 }

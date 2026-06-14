@@ -1,5 +1,6 @@
 com\luisdbb\tarea3AD2024base\view\FxmlView$21.class
 com\luisdbb\tarea3AD2024base\repositorios\EmpresaRepository.class
+com\luisdbb\tarea3AD2024base\controller\ApiMovilController$FormacionResponse.class
 com\luisdbb\tarea3AD2024base\controller\EstudianteMenuController.class
 com\luisdbb\tarea3AD2024base\controller\GestionarEstudiantesAdminController$1.class
 com\luisdbb\tarea3AD2024base\services\FormacionEmpresaService.class
@@ -20,6 +21,7 @@ com\luisdbb\tarea3AD2024base\view\FxmlView$17.class
 com\luisdbb\tarea3AD2024base\view\FxmlView$9.class
 com\luisdbb\tarea3AD2024base\config\StageManager.class
 com\luisdbb\tarea3AD2024base\modelo\Documentacion.class
+com\luisdbb\tarea3AD2024base\controller\ApiMovilController$LoginRequest.class
 com\luisdbb\tarea3AD2024base\controller\GestionarEmpresasController.class
 com\luisdbb\tarea3AD2024base\modelo\PeriodoPracticas.class
 com\luisdbb\tarea3AD2024base\services\ProfesoradoService.class
@@ -40,8 +42,10 @@ com\luisdbb\tarea3AD2024base\view\FxmlView$19.class
 com\luisdbb\tarea3AD2024base\controller\GestionarTutorEmpresaController.class
 com\luisdbb\tarea3AD2024base\services\SesionService.class
 com\luisdbb\tarea3AD2024base\controller\GestionarTutorEmpresaController$1.class
+com\luisdbb\tarea3AD2024base\controller\ApiMovilController$SeguimientoResponse.class
 com\luisdbb\tarea3AD2024base\modelo\Profesorado.class
 com\luisdbb\tarea3AD2024base\view\FxmlView$12.class
+com\luisdbb\tarea3AD2024base\controller\ApiMovilController.class
 com\luisdbb\tarea3AD2024base\view\FxmlView$4.class
 com\luisdbb\tarea3AD2024base\controller\AsociarCursosTutorController$1.class
 com\luisdbb\tarea3AD2024base\repositorios\UsuarioRepository.class
@@ -56,6 +60,7 @@ com\luisdbb\tarea3AD2024base\repositorios\FormacionEmpresaRepository.class
 com\luisdbb\tarea3AD2024base\repositorios\SeguimientoRepository.class
 com\luisdbb\tarea3AD2024base\view\FxmlView$8.class
 com\luisdbb\tarea3AD2024base\modelo\Administrador.class
+com\luisdbb\tarea3AD2024base\controller\ApiMovilController$LoginResponse.class
 com\luisdbb\tarea3AD2024base\controller\GestionarTutoresController.class
 com\luisdbb\tarea3AD2024base\services\SeguimientoService.class
 com\luisdbb\tarea3AD2024base\controller\AsignacionController.class

@@ -152,16 +152,18 @@ public class AsociarCursosTutorController implements Initializable {
 		Profesorado tutor = cboTutor.getValue();
 		if (tutor == null)
 			return;
-
 		List<PeriodoPracticas> todos = periodoService.findAll();
+		Long idTutor = tutor.getIdUsuario();
 
-		asignados.setAll(
-				todos.stream().filter(p -> tutor.equals(p.getCoordinador()))
-						.collect(Collectors.toList()));
+		asignados.setAll(todos.stream()
+				.filter(p -> p.getCoordinador() != null
+						&& idTutor.equals(p.getCoordinador().getIdUsuario()))
+				.collect(Collectors.toList()));
 
-		disponibles.setAll(
-				todos.stream().filter(p -> !tutor.equals(p.getCoordinador()))
-						.collect(Collectors.toList()));
+		disponibles.setAll(todos.stream()
+				.filter(p -> p.getCoordinador() == null
+						|| !idTutor.equals(p.getCoordinador().getIdUsuario()))
+				.collect(Collectors.toList()));
 
 		limpiarMensaje();
 	}
@@ -296,12 +298,12 @@ public class AsociarCursosTutorController implements Initializable {
 
 	private void ok(String msg) {
 		lblMensaje.setStyle("-fx-text-fill:#27ae60;");
-		lblMensaje.setText("Correcto " + msg);
+		lblMensaje.setText("Correcto: " + msg);
 	}
 
 	private void error(String msg) {
 		lblMensaje.setStyle("-fx-text-fill:#c0392b;");
-		lblMensaje.setText("Error " + msg);
+		lblMensaje.setText("Error: " + msg);
 	}
 
 	private void limpiarMensaje() {

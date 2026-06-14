@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 
 import com.luisdbb.tarea3AD2024base.config.StageManager;
 import com.luisdbb.tarea3AD2024base.modelo.Usuario;
+import com.luisdbb.tarea3AD2024base.services.SesionService;
 import com.luisdbb.tarea3AD2024base.services.UsuarioService;
 import com.luisdbb.tarea3AD2024base.view.FxmlView;
 
@@ -60,6 +61,10 @@ public class LoginController implements Initializable {
 	@FXML
 	private MenuItem openAyuda;
 	
+	
+	@Autowired
+	private SesionService sesionService;
+	
 	@Lazy
 	@Autowired
     private StageManager stageManager;
@@ -79,7 +84,7 @@ public class LoginController implements Initializable {
 	        Usuario u = usuarioService.autenticacion(user, contra);
 
 	        if (u != null) {
-	          
+	        	 sesionService.setUsuarioLogueado(u);
 	            switch (u.getPerfil()) {
 	                case ADMINISTRADOR:
 	                    stageManager.switchScene(FxmlView.ADMINISTRADOR);

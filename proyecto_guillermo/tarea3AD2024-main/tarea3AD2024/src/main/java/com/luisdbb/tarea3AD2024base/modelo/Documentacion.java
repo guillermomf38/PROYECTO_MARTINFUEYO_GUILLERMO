@@ -34,6 +34,11 @@ public class Documentacion {
 	@Column(name = "idFormacion")
 	private Long idFormacion;
 	
+	
+	public Documentacion() {
+		
+	}
+
 	public Documentacion(String nombre, String tipo, Long idFormacion) {
 	    this.nombre = nombre;
 	    this.tipo = tipo;

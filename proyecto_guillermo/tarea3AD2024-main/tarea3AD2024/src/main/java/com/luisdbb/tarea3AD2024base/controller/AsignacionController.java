@@ -24,8 +24,8 @@ import com.luisdbb.tarea3AD2024base.modelo.Empresa;
 import com.luisdbb.tarea3AD2024base.modelo.Estudiante;
 import com.luisdbb.tarea3AD2024base.modelo.FormacionEmpresa;
 import com.luisdbb.tarea3AD2024base.modelo.PeriodoPracticas;
-import com.luisdbb.tarea3AD2024base.modelo.Profesorado;
 import com.luisdbb.tarea3AD2024base.modelo.TutorEmpresa;
+import com.luisdbb.tarea3AD2024base.modelo.Usuario;
 import com.luisdbb.tarea3AD2024base.services.EmpresaService;
 import com.luisdbb.tarea3AD2024base.services.EstudianteService;
 import com.luisdbb.tarea3AD2024base.services.FormacionEmpresaService;
@@ -124,10 +124,9 @@ public class AsignacionController implements Initializable {
 	}
 
 	private void configurarCombos() {
-		Profesorado profe = sesionService.getProfesradoLogueado();
-
-	    List<Estudiante> estudiantes = (profe != null)
-	            ? estudianteService.findByProfesoradoId(profe.getIdUsuario())
+		Usuario u = sesionService.getUsuarioLogueado();
+	    List<Estudiante> estudiantes = (u != null)
+	            ? estudianteService.findByProfesoradoId(u.getIdUsuario())
 	            : estudianteService.findAll();
 
 	    cboEstudiante.setItems(FXCollections.observableArrayList(estudiantes));
@@ -172,10 +171,13 @@ public class AsignacionController implements Initializable {
 
 	/** Recarga las formaciones activas en la tabla. */
 	private void cargarDatos() {
-		datos.setAll(formacionService.findAll().stream()
-				.filter(FormacionEmpresa::isActiva).toList());
+	    try {
+	        datos.setAll(formacionService.findByActivaTrue());
+	    } catch (Exception e) {
+	      
+	        datos.clear();
+	    }
 	}
-
 	/**
 	 * Al seleccionar una empresa, recarga el combo de tutores filtrando solo
 	 * los que pertenecen a esa empresa. Esto garantiza coherencia en la
@@ -257,30 +259,6 @@ public class AsignacionController implements Initializable {
 	 *
 	 * @param event evento del botón Asignar
 	 */
-	@FXML
-	private void asignar(ActionEvent event) {
-		 Estudiante       est     = cboEstudiante.getValue();
-		    PeriodoPracticas periodo = cboPeriodo.getValue();
-		    Empresa          empresa = cboEmpresa.getValue();
-		    TutorEmpresa     tutor   = cboTutor.getValue();
-
-		    if (est == null || periodo == null || empresa == null || tutor == null) {
-		        error("Selecciona estudiante, periodo, empresa y tutor."); return;
-		    }
-		 
-		    if (formacionService.findActivaByEstudianteId(est.getIdUsuario()).isPresent()) {
-		        error("El estudiante ya tiene una formación activa. Desactívala primero."); return;
-		    }
-		    try {
-		        FormacionEmpresa nueva = new FormacionEmpresa(est, empresa, tutor, periodo);
-		        formacionService.save(nueva);
-		        cargarDatos();
-		        limpiarCombos();
-		        ok("Formación creada correctamente.");
-		    } catch (Exception ex) {
-		        error("Error al asignar: " + ex.getMessage());
-		    }
-	}
 
 	/**
 	 * Desactiva la formación del estudiante seleccionado en el combo. Se usa
@@ -311,6 +289,34 @@ public class AsignacionController implements Initializable {
 	            },
 	            () -> error("El estudiante no tiene formación activa.")
 	        );
+	}
+	
+	@FXML
+	private void asignar(ActionEvent event) {
+	    Estudiante       est     = cboEstudiante.getValue();
+	    PeriodoPracticas periodo = cboPeriodo.getValue();
+	    Empresa          empresa = cboEmpresa.getValue();
+	    TutorEmpresa     tutor   = cboTutor.getValue();
+
+	    if (est == null || periodo == null || empresa == null || tutor == null) {
+	        error(" Selecciona estudiante, periodo, empresa y tutor.");
+	        return;
+	    }
+
+	    if (formacionService.findActivaByEstudianteId(est.getIdUsuario()).isPresent()) {
+	        error(" El estudiante ya tiene una formación activa. Desactívala primero.");
+	        return;
+	    }
+
+	    try {
+	        FormacionEmpresa nueva = new FormacionEmpresa(est, empresa, tutor, periodo);
+	        formacionService.save(nueva);
+	        cargarDatos();
+	        limpiarCombos();
+	        ok("Formación creada correctamente.");
+	    } catch (Exception ex) {
+	        error("Error al asignar: " + ex.getMessage());
+	    }
 	}
 
 	/**
@@ -356,12 +362,12 @@ public class AsignacionController implements Initializable {
 
 	private void ok(String msg) {
 		lblMensaje.setStyle("-fx-text-fill:#27ae60;");
-		lblMensaje.setText("Correcto " + msg);
+		lblMensaje.setText("Correcto: " + msg);
 	}
 
 	private void error(String msg) {
 		lblMensaje.setStyle("-fx-text-fill:#c0392b;");
-		lblMensaje.setText("Error" + msg);
+		lblMensaje.setText("Error: " + msg);
 	}
 
 	private void limpiarMensaje() {

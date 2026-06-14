@@ -8,6 +8,8 @@
 package com.luisdbb.tarea3AD2024base.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +58,10 @@ public class GestionarTutoresController implements Initializable {
 	private TextField txtEmail;
 	
 	
-	
-	@FXML private MensajeLabel lblMensaje;
+	@FXML 
+	private TextField txtBuscar;
+	@FXML
+	private MensajeLabel lblMensaje;
 	
 	
 	
@@ -100,6 +104,8 @@ public class GestionarTutoresController implements Initializable {
 	private ProfesoradoService profesoradoService;
 
 	private Profesorado seleccionado;
+	
+	private List<Profesorado> todosLosTutores = new ArrayList<>();
 
 	private final ObservableList<Profesorado> datos = FXCollections
 			.observableArrayList();
@@ -108,10 +114,28 @@ public class GestionarTutoresController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		configurarTabla();
 		cargarDatos();
+		configurarBuscador();
 		
 		 openAyuda.setAccelerator(
 			        new KeyCodeCombination(KeyCode.F1)
 			    );
+	}
+	
+	private void configurarBuscador() {
+	    txtBuscar.textProperty().addListener((observable, anterior, nuevo) -> {
+	        if (nuevo == null || nuevo.isBlank()) {
+	            
+	            datos.setAll(todosLosTutores);
+	        } else {
+	            String filtro = nuevo.toLowerCase().trim();
+	            datos.setAll(todosLosTutores.stream()
+	                    .filter(p ->
+	                            p.getNombre().toLowerCase().contains(filtro)
+	                            || p.getApellidos().toLowerCase().contains(filtro)
+	                            || p.getUsuario().toLowerCase().contains(filtro))
+	                    .toList());
+	        }
+	    });
 	}
 
 	private void configurarTabla() {
@@ -133,7 +157,19 @@ public class GestionarTutoresController implements Initializable {
 	}
 
 	private void cargarDatos() {
-		datos.setAll(profesoradoService.findAll());
+		 todosLosTutores = profesoradoService.findAll();
+		    String filtroActual = txtBuscar != null ? txtBuscar.getText() : "";
+		    if (filtroActual.isBlank()) {
+		        datos.setAll(todosLosTutores);
+		    } else {
+		        String filtro = filtroActual.toLowerCase().trim();
+		        datos.setAll(todosLosTutores.stream()
+		                .filter(p ->
+		                        p.getNombre().toLowerCase().contains(filtro)
+		                        || p.getApellidos().toLowerCase().contains(filtro)
+		                        || p.getUsuario().toLowerCase().contains(filtro))
+		                .toList());
+		    }
 	}
 
 	private void rellenarFormulario(Profesorado p) {
@@ -144,7 +180,11 @@ public class GestionarTutoresController implements Initializable {
 		txtEmail.setText(p.getEmail());
 		lblMensaje.limpiar();
 	}
-
+	@FXML
+	private void limpiarBusqueda(ActionEvent event) {
+	    txtBuscar.clear();
+	    datos.setAll(todosLosTutores);
+	}
 	@FXML
 	private void guardar(ActionEvent e) {
 		if (!validarCamposObligatorios())
@@ -158,17 +198,17 @@ public class GestionarTutoresController implements Initializable {
 
 		if (contrasena.isBlank()) {
 		
-			lblMensaje.showError("La contraseña es obligatoria al crear un tutor.");
+			lblMensaje.showError(" La contraseña es obligatoria al crear un tutor.");
 			return;
 		}
 		if (profesoradoService.existeUsuario(usuario)) {
 			
-			lblMensaje.showError("El nombre de usuario '" + usuario + "' ya esta en uso.");
+			lblMensaje.showError(" El nombre de usuario '" + usuario + "' ya esta en uso.");
 			return;
 		}
 		if (profesoradoService.existeEmail(email)) {
 			
-			lblMensaje.showError("El email '" + email + "' ya está registrado.");
+			lblMensaje.showError(" El email '" + email + "' ya está registrado.");
 			return;
 		}
 
@@ -179,11 +219,11 @@ public class GestionarTutoresController implements Initializable {
 			cargarDatos();
 			limpiar(null);
 			
-			lblMensaje.showOk("Tutor '" + nombre + " " + apellidos
+			lblMensaje.showOk(" Tutor '" + nombre + " " + apellidos
 					+ "' creado correctamente.");
 		} catch (Exception ex) {
 		
-			lblMensaje.showError("Error al guardar: " + ex.getMessage());
+			lblMensaje.showError(" Error al guardar: " + ex.getMessage());
 		}
 	}
 
@@ -191,7 +231,7 @@ public class GestionarTutoresController implements Initializable {
 	private void modificar(ActionEvent e) {
 		if (seleccionado == null) {
 			
-			lblMensaje.showError("Selecciona un tutor de la tabla para modificar.");
+			lblMensaje.showError(" Selecciona un tutor de la tabla para modificar.");
 			
 			return;
 		}
@@ -205,7 +245,7 @@ public class GestionarTutoresController implements Initializable {
 				&& profesoradoService.existeEmail(email)) {
 		
 			
-			lblMensaje.showError("El email '" + email
+			lblMensaje.showError(" El email '" + email
 					+ "' ya está registrado por otro tutor.");
 			return;
 		}
@@ -221,10 +261,10 @@ public class GestionarTutoresController implements Initializable {
 			cargarDatos();
 			limpiar(null);
 			
-			lblMensaje.showOk("Tutor modificado correctamente.");
+			lblMensaje.showOk(" Tutor modificado correctamente.");
 		} catch (Exception ex) {
 			
-			lblMensaje.showError("Error al modificar: " + ex.getMessage());
+			lblMensaje.showError(" Error al modificar: " + ex.getMessage());
 		}
 	}
 
@@ -232,7 +272,7 @@ public class GestionarTutoresController implements Initializable {
 	private void eliminar(ActionEvent e) {
 		if (seleccionado == null) {
 			
-			lblMensaje.showError("Selecciona un tutor de la tabla para eliminar.");
+			lblMensaje.showError(" Selecciona un tutor de la tabla para eliminar.");
 			return;
 		}
 
@@ -249,13 +289,13 @@ public class GestionarTutoresController implements Initializable {
 					profesoradoService.delete(seleccionado.getIdUsuario());
 					cargarDatos();
 					limpiar(null);
-					lblMensaje.showOk("Tutor eliminado"
+					lblMensaje.showOk(" Tutor eliminado"
 							+ " correctamente.");
 
 				} catch (Exception ex) {
 					
 					
-					lblMensaje.showError("No se puede eliminar: el tutor tiene estudiantes "
+					lblMensaje.showError(" No se puede eliminar: el tutor tiene estudiantes "
 							+ "o periodos asignados. Reasígnalos primero.");
 				}
 			}
@@ -283,7 +323,7 @@ public class GestionarTutoresController implements Initializable {
 		if (txtUsuario.getText().isBlank() || txtNombre.getText().isBlank()
 				|| txtApellidos.getText().isBlank()
 				|| txtEmail.getText().isBlank()) {
-			lblMensaje.showError("Usuario, nombre, apellidos y email son obligatorios.");
+			lblMensaje.showError(" Usuario, nombre, apellidos y email son obligatorios.");
 			return false;
 		}
 		return true;

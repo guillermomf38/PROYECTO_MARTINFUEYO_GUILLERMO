@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 
 import com.luisdbb.tarea3AD2024base.config.StageManager;
 import com.luisdbb.tarea3AD2024base.modelo.Profesorado;
+import com.luisdbb.tarea3AD2024base.modelo.Usuario;
 import com.luisdbb.tarea3AD2024base.services.ProfesoradoService;
 import com.luisdbb.tarea3AD2024base.services.SesionService;
 import com.luisdbb.tarea3AD2024base.view.FxmlView;
@@ -80,7 +81,10 @@ public class ModificarDatosProfeController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		  tutorLogueado = sesionService.getProfesradoLogueado();
+		 Usuario u = sesionService.getUsuarioLogueado();
+		    if (u != null) {
+		        tutorLogueado = profesoradoService.findById(u.getIdUsuario());
+		    }
 		    if (tutorLogueado != null) {
 		        txtNombre.setText(tutorLogueado.getNombre());
 		        txtApellidos.setText(tutorLogueado.getApellidos());

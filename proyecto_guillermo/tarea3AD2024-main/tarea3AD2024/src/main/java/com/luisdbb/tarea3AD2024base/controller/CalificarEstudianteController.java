@@ -303,12 +303,12 @@ public class CalificarEstudianteController implements Initializable {
 
 	private void ok(String msg) {
 		lblMensaje.setStyle("-fx-text-fill:#27ae60;");
-		lblMensaje.setText("Correcto  " + msg);
+		lblMensaje.setText("Correcto:  " + msg);
 	}
 
 	private void error(String msg) {
 		lblMensaje.setStyle("-fx-text-fill:#c0392b;");
-		lblMensaje.setText("Eliminar" + msg);
+		lblMensaje.setText("Error: " + msg);
 	}
 
 	private void limpiarMensaje() {

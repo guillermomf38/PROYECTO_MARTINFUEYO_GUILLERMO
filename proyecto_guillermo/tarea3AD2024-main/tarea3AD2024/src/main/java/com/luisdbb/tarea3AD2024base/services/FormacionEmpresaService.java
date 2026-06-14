@@ -123,4 +123,8 @@ public class FormacionEmpresaService {
 	public Optional<FormacionEmpresa> findActivaByEstudianteId(Long idEstudiante) {
 	    return formacionRepository.findActivaByEstudianteId(idEstudiante);
 	}
+	
+	public List<FormacionEmpresa> findByActivaTrue() {
+	    return formacionRepository.findByActivaTrue();
+	}
 }
